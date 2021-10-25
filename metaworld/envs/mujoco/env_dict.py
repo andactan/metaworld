@@ -1,6 +1,19 @@
 from collections import OrderedDict
 
+# import KUKA environments
 from metaworld.envs.mujoco.sawyer_xyz.kuka import SawyerReachPushPickPlaceKukaEnv
+from metaworld.envs.mujoco.sawyer_xyz.kuka import SawyerWindowOpenKukaEnv
+from metaworld.envs.mujoco.sawyer_xyz.kuka.sawyer_basketball_kuka import SawyerBasketballKukaEnv
+from metaworld.envs.mujoco.sawyer_xyz.kuka.sawyer_button_press_topdown_kuka import SawyerButtonPressTopdownKukaEnv
+from metaworld.envs.mujoco.sawyer_xyz.kuka.sawyer_door_close_kuka import SawyerDoorCloseKukaEnv
+from metaworld.envs.mujoco.sawyer_xyz.kuka.sawyer_door_kuka import SawyerDoorKukaEnv
+from metaworld.envs.mujoco.sawyer_xyz.kuka.sawyer_drawer_close_kuka import SawyerDrawerCloseKukaEnv
+from metaworld.envs.mujoco.sawyer_xyz.kuka.sawyer_drawer_open_kuka import SawyerDrawerOpenKukaEnv
+from metaworld.envs.mujoco.sawyer_xyz.kuka.sawyer_lever_pull_kuka import SawyerLeverPullKukaEnv
+from metaworld.envs.mujoco.sawyer_xyz.kuka.sawyer_peg_insertion_side_kuka import SawyerPegInsertionSideKukaEnv
+from metaworld.envs.mujoco.sawyer_xyz.kuka.sawyer_shelf_place_kuka import SawyerShelfPlaceKukaEnv
+from metaworld.envs.mujoco.sawyer_xyz.kuka.sawyer_sweep_into_goal_kuka import SawyerSweepIntoGoalKukaEnv
+from metaworld.envs.mujoco.sawyer_xyz.kuka.sawyer_sweep_kuka import SawyerSweepKukaEnv
 
 from metaworld.envs.mujoco.sawyer_xyz.v1 import (
     SawyerNutAssemblyEnv,
@@ -240,28 +253,29 @@ EASY_MODE_ARGS_KWARGS['reach-v1']['kwargs']['task_type'] = 'reach'
 EASY_MODE_ARGS_KWARGS['push-v1']['kwargs']['task_type'] = 'push'
 EASY_MODE_ARGS_KWARGS['pick-place-v1']['kwargs']['task_type'] = 'pick_place'
 
-
+# ML10 environments
+# * updated for KUKA environment configurations
 MEDIUM_MODE_CLS_DICT = OrderedDict((
     ('train',
         OrderedDict((
             ('reach-v1', SawyerReachPushPickPlaceKukaEnv),
             ('push-v1', SawyerReachPushPickPlaceKukaEnv),
             ('pick-place-v1', SawyerReachPushPickPlaceKukaEnv),
-            ('door-open-v1', SawyerDoorEnv),
-            ('drawer-close-v1', SawyerDrawerCloseEnv),
-            ('button-press-topdown-v1', SawyerButtonPressTopdownEnv),
-            ('peg-insert-side-v1', SawyerPegInsertionSideEnv),
-            ('window-open-v1', SawyerWindowOpenEnv),
-            ('sweep-v1', SawyerSweepEnv),
-            ('basketball-v1', SawyerBasketballEnv)))
+            ('door-open-v1', SawyerDoorKukaEnv),
+            ('drawer-close-v1', SawyerDrawerCloseKukaEnv),
+            ('button-press-topdown-v1', SawyerButtonPressTopdownKukaEnv),
+            ('peg-insert-side-v1', SawyerPegInsertionSideKukaEnv),
+            ('window-open-v1', SawyerWindowOpenKukaEnv),
+            ('sweep-v1', SawyerSweepKukaEnv),
+            ('basketball-v1', SawyerBasketballKukaEnv)))
     ),
     ('test',
         OrderedDict((
-            ('drawer-open-v1', SawyerDrawerOpenEnv),
-            ('door-close-v1', SawyerDoorCloseEnv),
-            ('shelf-place-v1', SawyerShelfPlaceEnv),
-            ('sweep-into-v1', SawyerSweepIntoGoalEnv),
-            ('lever-pull-v1', SawyerLeverPullEnv,)))
+            ('drawer-open-v1', SawyerDrawerOpenKukaEnv),
+            ('door-close-v1', SawyerDoorCloseKukaEnv),
+            ('shelf-place-v1', SawyerShelfPlaceKukaEnv),
+            ('sweep-into-v1', SawyerSweepIntoGoalKukaEnv),
+            ('lever-pull-v1', SawyerLeverPullKukaEnv,)))
     )
 ))
 medium_mode_train_args_kwargs = {
