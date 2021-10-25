@@ -258,16 +258,16 @@ EASY_MODE_ARGS_KWARGS['pick-place-v1']['kwargs']['task_type'] = 'pick_place'
 MEDIUM_MODE_CLS_DICT = OrderedDict((
     ('train',
         OrderedDict((
-            ('reach-v1', SawyerReachPushPickPlaceKukaEnv),
-            ('push-v1', SawyerReachPushPickPlaceKukaEnv),
-            ('pick-place-v1', SawyerReachPushPickPlaceKukaEnv),
-            ('door-open-v1', SawyerDoorKukaEnv),
+            ('reach-v1', SawyerReachPushPickPlaceKukaEnv), # completed
+            ('push-v1', SawyerReachPushPickPlaceKukaEnv), # completed
+            ('pick-place-v1', SawyerReachPushPickPlaceKukaEnv), # completed
+            ('door-open-v1', SawyerDoorKukaEnv), # completed
             ('drawer-close-v1', SawyerDrawerCloseKukaEnv),
             ('button-press-topdown-v1', SawyerButtonPressTopdownKukaEnv),
             ('peg-insert-side-v1', SawyerPegInsertionSideKukaEnv),
             ('window-open-v1', SawyerWindowOpenKukaEnv),
             ('sweep-v1', SawyerSweepKukaEnv),
-            ('basketball-v1', SawyerBasketballKukaEnv)))
+            ('basketball-v1', SawyerBasketballKukaEnv))) # completed
     ),
     ('test',
         OrderedDict((

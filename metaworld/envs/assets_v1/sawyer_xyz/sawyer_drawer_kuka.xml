@@ -6,8 +6,8 @@
     <!-- update base -->
     <include file="sawyer_xyz_base_kuka.xml"></include>
 
-    <!--TODO update position -->
-    <body name="drawer" pos="0. 0.9 0.04">
+    <!-- update position -->
+    <body name="drawer" pos="0.55 0. 0.04">
       <geom rgba="1 0.3 0.3 1" type="box" contype="1" size="0.1 0.1 0.001" name="drawer_bottom" conaffinity="1" pos="0 0 0.005" mass="1000" material="light_wood_v2" />
       <geom rgba="1 0.3 0.3 1" type="box" solimp="0.99 0.99 0.01" contype="1" size="0.1 0.001 0.05" name="drawer_wall1" conaffinity="1" pos="0.0 0.1 0.054" mass="1000" solref="0.01 1" material="light_wood_v2"/>
       <geom rgba="1 0.3 0.3 1" type="box" solimp="0.99 0.99 0.01" contype="1" size="0.1 0.001 0.05" name="drawer_wall2" conaffinity="1" pos="0.0 -0.1 0.054" mass="1000" solref="0.01 1" material="light_wood_v2"/>
@@ -30,8 +30,8 @@
           <joint type="slide" range="0. 0.00000001" axis="0 0 1" name="goal_slidez" pos="0 0 0" damping="1.0"/> -->
     </body>
 
-    <!--TODO update position -->
-    <body name="drawer_cover" pos="0. 0.9 0.02">
+    <!-- update position -->
+    <body name="drawer_cover" pos="0.55 0. 0.02">
       <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.105 0.105 0.001" name="cover_top" conaffinity="1" pos="0 0 0.2" mass="1000" material="light_wood_v2"/>
       <!-- <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.12 0.12 0.001" name="cover_bottom" conaffinity="1" pos="0 0 0.005" mass="1000"/> -->
       <geom rgba="0.3 0.3 1 1" type="box" solimp="0.99 0.99 0.01" contype="1" size="0.105 0.001 0.1" name="cover_wall1" conaffinity="1" pos="0.0 0.105 0.102" mass="1000" solref="0.01 1" material="light_wood_v2"/>
@@ -45,8 +45,8 @@
       <!-- <joint type="slide" range="-0.2 0." axis="0 1 0" name="goal_slidey" pos="0 0 0" damping="1.0"/> -->
     </body>
 
-    <!--TODO update position -->
-    <site name="goal" pos="0. 0.7 0.05" size="0.02" rgba="0 0.8 0 1"/>
+    <!-- update position -->
+    <site name="goal" pos="0.7 0. 0.05" size="0.02" rgba="0 0.8 0 1"/>
   </worldbody>
 
   <actuator>
