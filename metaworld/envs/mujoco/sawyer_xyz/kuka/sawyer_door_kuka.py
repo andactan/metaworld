@@ -8,11 +8,11 @@ from metaworld.envs.mujoco.sawyer_xyz.sawyer_xyz_env import SawyerXYZEnv, _asser
 class SawyerDoorKukaEnv(SawyerXYZEnv):
     def __init__(self):
 
-        # todo: modify configurations
-        hand_low = (-0.5, 0.40, 0.05)
-        hand_high = (0.5, 1, 0.5)
-        obj_low = (0., 0.85, 0.1)
-        obj_high = (0.1, 0.95, 0.1)
+        # modify configurations
+        hand_low = (0.45, -0.45, 0.05)
+        hand_high = (0.85, 0.45, 0.3)
+        obj_low = (0.45, 0., 0.1)
+        obj_high = (0.55, 0.1, 0.1)
 
         super().__init__(
             self.model_name,
@@ -20,15 +20,15 @@ class SawyerDoorKukaEnv(SawyerXYZEnv):
             hand_high=hand_high,
         )
 
-        # todo: modify initial positions
+        # modify initial positions
         self.init_config = {
             'obj_init_angle': np.array([0.3, ]),
-            'obj_init_pos': np.array([0.1, 0.95, 0.1]),
-            'hand_init_pos': np.array([0, 0.6, 0.2]),
+            'obj_init_pos': np.array([0.54, 0.1, 0.1]),
+            'hand_init_pos': np.array([0.6, 0, 0.2]),
         }
 
-        # todo: modify goal position
-        self.goal = np.array([-0.2, 0.7, 0.15])
+        # modify goal position
+        self.goal = np.array([0.6, -0.2, 0.15])
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.obj_init_angle = self.init_config['obj_init_angle']
         self.hand_init_pos = self.init_config['hand_init_pos']
@@ -46,8 +46,8 @@ class SawyerDoorKukaEnv(SawyerXYZEnv):
 
     @property
     def model_name(self):
-        # todo: modify XML path
-        return full_v1_path_for('sawyer_xyz/sawyer_door_pull.xml')
+        # modify XML path
+        return full_v1_path_for('sawyer_xyz/sawyer_door_pull_kuka.xml')
 
     @_assert_task_is_set
     def step(self, action):
