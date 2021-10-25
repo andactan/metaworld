@@ -9,11 +9,11 @@ class SawyerLeverPullKukaEnv(SawyerXYZEnv):
 
     def __init__(self):
 
-        # todo: modify range configs
-        hand_low = (-0.5, 0.40, -0.15)
-        hand_high = (0.5, 1, 0.5)
-        obj_low = (-0.1, 0.7, 0.05)
-        obj_high = (0.1, 0.8, 0.05)
+        # modify range configs
+        hand_low = (0.45, -0.45, 0.05)
+        hand_high = (0.85, 0.45, 0.3)
+        obj_low = (0.45, -0.1, 0.05)
+        obj_high = (0.55, 0.1, 0.05)
 
         super().__init__(
             self.model_name,
@@ -21,14 +21,14 @@ class SawyerLeverPullKukaEnv(SawyerXYZEnv):
             hand_high=hand_high,
         )
 
-        # todo: modify init configs
+        # modify init configs
         self.init_config = {
-            'obj_init_pos': np.array([0, 0.7, 0.05]),
-            'hand_init_pos': np.array([0, 0.6, 0.2], dtype=np.float32),
+            'obj_init_pos': np.array([0.55, 0, 0.05]),
+            'hand_init_pos': np.array([0.6, 0, 0.2], dtype=np.float32),
         }
 
-        # todo: modify goal position
-        self.goal = np.array([0, 0.75, -0.12])
+        # modify goal position
+        self.goal = np.array([0.75, 0, 0.2]) #? is z-pos correct?
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.hand_init_pos = self.init_config['hand_init_pos']
 
@@ -43,8 +43,8 @@ class SawyerLeverPullKukaEnv(SawyerXYZEnv):
 
     @property
     def model_name(self):
-        # todo: modify XML path
-        return full_v1_path_for('sawyer_xyz/sawyer_lever_pull.xml')
+        # modify XML path
+        return full_v1_path_for('sawyer_xyz/sawyer_lever_pull_kuka.xml')
 
     @_assert_task_is_set
     def step(self, action):
