@@ -1,5 +1,4 @@
 import abc
-import warnings
 
 import glfw
 from gym import error
@@ -36,9 +35,9 @@ class MujocoEnv(gym.Env, abc.ABC):
      - Do not automatically set the observation/action space.
     """
 
-    max_path_length = 500
+    max_path_length = 150
 
-    def __init__(self, model_path, frame_skip):
+    def __init__(self, model_path, frame_skip, rgb_array_res=(640, 480)):
         if not path.exists(model_path):
             raise IOError("File %s does not exist" % model_path)
 
@@ -48,6 +47,7 @@ class MujocoEnv(gym.Env, abc.ABC):
         self.data = self.sim.data
         self.viewer = None
         self._viewers = {}
+        self._rgb_array_res = rgb_array_res
 
         self.metadata = {
             'render.modes': ['human'],
@@ -55,8 +55,6 @@ class MujocoEnv(gym.Env, abc.ABC):
         }
         self.init_qpos = self.sim.data.qpos.ravel().copy()
         self.init_qvel = self.sim.data.qvel.ravel().copy()
-
-        self._did_see_sim_exception = False
 
         self.seed()
 
@@ -82,7 +80,6 @@ class MujocoEnv(gym.Env, abc.ABC):
 
     @_assert_task_is_set
     def reset(self):
-        self._did_see_sim_exception = False
         self.sim.reset()
         ob = self.reset_model()
         if self.viewer is not None:
@@ -104,33 +101,23 @@ class MujocoEnv(gym.Env, abc.ABC):
     def do_simulation(self, ctrl, n_frames=None):
         if getattr(self, 'curr_path_length', 0) > self.max_path_length:
             raise ValueError('Maximum path length allowed by the benchmark has been exceeded')
-        if self._did_see_sim_exception:
-            return
-
         if n_frames is None:
             n_frames = self.frame_skip
         self.sim.data.ctrl[:] = ctrl
-
         for _ in range(n_frames):
-            try:
-                self.sim.step()
-            except mujoco_py.MujocoException as err:
-                warnings.warn(str(err), category=RuntimeWarning)
-                self._did_see_sim_exception = True
+            self.sim.step()
 
-    def render(self, offscreen=False, camera_name="corner2", resolution=(640, 480)):
-        assert_string = ("camera_name should be one of ",
-                "corner3, corner, corner2, topview, gripperPOV, behindGripper")
-        assert camera_name in {"corner3", "corner", "corner2", 
-            "topview", "gripperPOV", "behindGripper"}, assert_string
-        if not offscreen:
-            self._get_viewer('human').render()
-        else:
+    def render(self, mode='human'):
+        if mode == 'human':
+            self._get_viewer(mode).render()
+        elif mode == 'rgb_array':
             return self.sim.render(
-                *resolution,
+                *self._rgb_array_res,
                 mode='offscreen',
-                camera_name=camera_name
-            )
+                camera_name='topview'
+            )[:, :, ::-1]
+        else:
+            raise ValueError("mode can only be either 'human' or 'rgb_array'")
 
     def close(self):
         if self.viewer is not None:

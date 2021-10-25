@@ -3,6 +3,7 @@
     <include file="shared_config.xml"></include>
 
     <worldbody>
+        <!-- <include file="kuka_mesh_collision_gripper.xml"/> -->
         <include file="sawyer_xyz_base.xml"></include>
         <body name="obj" pos="0 0.6 0.02">
 
@@ -24,14 +25,15 @@
         <!-- place goal -->
         <site name="goal_pick_place" pos="0.1 0.8 0.2" size="0.02" 
               rgba="0 0 0.8 1"/>
-
-       
+        
     </worldbody>
 
     <actuator>
+
         <position ctrllimited="true" ctrlrange="-1 1" joint="r_close" kp="400"  user="1"/>
         <position ctrllimited="true" ctrlrange="-1 1" joint="l_close" kp="400"  user="1"/>
-       
+
+        <!-- <include file="gripper_actuators.xml"/> -->
     </actuator>
 
 </mujoco>
