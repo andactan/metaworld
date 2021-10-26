@@ -274,8 +274,8 @@ MEDIUM_MODE_CLS_DICT = OrderedDict((
             ('drawer-open-v1', SawyerDrawerOpenKukaEnv),
             ('door-close-v1', SawyerDoorCloseKukaEnv),
             ('shelf-place-v1', SawyerShelfPlaceKukaEnv),
-            ('sweep-into-v1', SawyerSweepIntoGoalKukaEnv),
-            ('lever-pull-v1', SawyerLeverPullKukaEnv,))) # completed
+            ('sweep-into-v1', SawyerSweepIntoGoalEnv),
+            ('lever-pull-v1', SawyerLeverPullEnv,))) # completed
     )
 ))
 medium_mode_train_args_kwargs = {

@@ -11,8 +11,8 @@ class SawyerBasketballKukaEnv(SawyerXYZEnv):
 
         # modify range configs
         liftThresh = 0.3
-        goal_low = (0.65, -0.1, 0.15)
-        goal_high = (0.75, 0.1, 0.15)
+        goal_low = (0.7, 0, 0.15)
+        goal_high = (0.7, 0, 0.15)
         hand_low = (0.45, -0.45, 0.05)
         hand_high = (0.85, 0.45, 0.3)
         obj_low = (0.45, -0.1, 0)
@@ -32,7 +32,7 @@ class SawyerBasketballKukaEnv(SawyerXYZEnv):
         }
 
         # modify goal position
-        self.goal = np.array([0.70, 0, 0.15])
+        self.goal = np.array([0.7, 0, 0.15])
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.obj_init_angle = self.init_config['obj_init_angle']
         self.hand_init_pos = self.init_config['hand_init_pos']
@@ -44,8 +44,8 @@ class SawyerBasketballKukaEnv(SawyerXYZEnv):
             np.hstack((obj_high, goal_high)),
         )
         self.goal_space = Box(
-            np.array(goal_low) + np.array([0, -0.05001, 0.1000]),
-            np.array(goal_high) + np.array([0, -0.05000, 0.1001])
+            np.array(goal_low),
+            np.array(goal_high)
         )
 
     @property
@@ -75,6 +75,7 @@ class SawyerBasketballKukaEnv(SawyerXYZEnv):
         self._reset_hand()
 
         basket_pos = self.goal.copy()
+        print(f'BASKET_GOAL ==> {basket_pos}')
         self.sim.model.body_pos[self.model.body_name2id('basket_goal')] = basket_pos
         self._target_pos = self.data.site_xpos[self.model.site_name2id('goal')]
 
@@ -89,7 +90,7 @@ class SawyerBasketballKukaEnv(SawyerXYZEnv):
                 basket_pos = goal_pos[3:]
             self.obj_init_pos = np.concatenate((goal_pos[:2], [self.obj_init_pos[-1]]))
             self.sim.model.body_pos[self.model.body_name2id('basket_goal')] = basket_pos
-            self._target_pos = basket_pos + np.array([0, -0.05, 0.1])
+            self._target_pos = basket_pos + np.array([-0.05 ,0, 0.1])
 
         self._set_obj_xyz(self.obj_init_pos)
         self.maxPlacingDist = np.linalg.norm(np.array([self.obj_init_pos[0], self.obj_init_pos[1], self.heightTarget]) - np.array(self._target_pos)) + self.heightTarget
