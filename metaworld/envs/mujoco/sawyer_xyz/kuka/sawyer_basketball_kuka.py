@@ -75,7 +75,6 @@ class SawyerBasketballKukaEnv(SawyerXYZEnv):
         self._reset_hand()
 
         basket_pos = self.goal.copy()
-        print(f'BASKET_GOAL ==> {basket_pos}')
         self.sim.model.body_pos[self.model.body_name2id('basket_goal')] = basket_pos
         self._target_pos = self.data.site_xpos[self.model.site_name2id('goal')]
 

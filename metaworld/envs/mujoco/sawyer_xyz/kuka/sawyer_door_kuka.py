@@ -11,8 +11,8 @@ class SawyerDoorKukaEnv(SawyerXYZEnv):
         # modify configurations
         hand_low = (0.45, -0.45, 0.05)
         hand_high = (0.85, 0.45, 0.3)
-        obj_low = (0.45, 0., 0.1)
-        obj_high = (0.55, 0.1, 0.1)
+        obj_low = (0.55, 0., 0.1)
+        obj_high = (0.75, 0.1, 0.1)
 
         super().__init__(
             self.model_name,
@@ -23,12 +23,12 @@ class SawyerDoorKukaEnv(SawyerXYZEnv):
         # modify initial positions
         self.init_config = {
             'obj_init_angle': np.array([0.3, ]),
-            'obj_init_pos': np.array([0.54, 0.1, 0.1]),
+            'obj_init_pos': np.array([0.6, 0.1, 0.1]),
             'hand_init_pos': np.array([0.6, 0, 0.2]),
         }
 
         # modify goal position
-        self.goal = np.array([0.6, -0.2, 0.15])
+        self.goal = np.array([0.35, -0.2, 0.15])
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.obj_init_angle = self.init_config['obj_init_angle']
         self.hand_init_pos = self.init_config['hand_init_pos']
@@ -81,7 +81,9 @@ class SawyerDoorKukaEnv(SawyerXYZEnv):
 
         self.obj_init_pos = self._get_state_rand_vec() if self.random_init \
             else self.init_config['obj_init_pos']
-        self._target_pos = self.obj_init_pos + np.array([-0.3, -0.25, 0.05])
+
+        # reversed x and y coordinates of the array
+        self._target_pos = self.obj_init_pos + np.array([-0.25, -0.3, 0.05])
 
         self.sim.model.body_pos[self.model.body_name2id('door')] = self.obj_init_pos
         self.sim.model.site_pos[self.model.site_name2id('goal')] = self._target_pos
