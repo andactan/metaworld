@@ -9,10 +9,10 @@ class SawyerDrawerCloseKukaEnv(SawyerXYZEnv):
     def __init__(self):
 
         # modify configurations
-        hand_low = (0.45, -0.45, 0.05)
+        hand_low = (0.45, -0.45, 0.1)
         hand_high = (0.85, 0.45, 0.3)
-        obj_low = (0.55, -0.1, 0.04)
-        obj_high = (0.55, 0.1, 0.04)
+        obj_low = (0.9, -0.1, 0.04) # changed
+        obj_high = (0.9, 0.1, 0.04) # changed
         goal_low = (0.699, -0.1, 0.1)
         goal_high = (0.701, 0.1, 0.1)
 
@@ -25,7 +25,7 @@ class SawyerDrawerCloseKukaEnv(SawyerXYZEnv):
         # modify initial configurations
         self.init_config = {
             'obj_init_angle': np.array([0.3, ], dtype=np.float32),
-            'obj_init_pos': np.array([0.55, 0., 0.04], dtype=np.float32),
+            'obj_init_pos': np.array([0.9, 0., 0.04], dtype=np.float32),
             'hand_init_pos': np.array([0.6, 0, 0.2], dtype=np.float32),
         }
         self.obj_init_pos = self.init_config['obj_init_pos']
@@ -69,14 +69,14 @@ class SawyerDrawerCloseKukaEnv(SawyerXYZEnv):
 
     def reset_model(self):
         self._reset_hand()
-        self._target_pos = self.obj_init_pos - np.array([.0, .2, .0])
-        self.objHeight = self.data.get_geom_xpos('handle')[2]
+        self._target_pos = self.obj_init_pos - np.array([.2, .0, .0]) # changed
+        self.objHeight = self.data.get_geom_xpos('handle')[2] # TODO: might need a change
 
         if self.random_init:
             obj_pos = self._get_state_rand_vec()
             self.obj_init_pos = obj_pos
             goal_pos = obj_pos.copy()
-            goal_pos[1] -= 0.2
+            goal_pos[0] -= 0.2 # changed
             self._target_pos = goal_pos
 
         drawer_cover_pos = self.obj_init_pos.copy()
@@ -85,7 +85,7 @@ class SawyerDrawerCloseKukaEnv(SawyerXYZEnv):
         self.sim.model.body_pos[self.model.body_name2id('drawer_cover')] = drawer_cover_pos
         self.sim.model.site_pos[self.model.site_name2id('goal')] = self._target_pos
         self._set_obj_xyz(-0.2)
-        self.maxDist = np.abs(self.data.get_geom_xpos('handle')[1] - self._target_pos[1])
+        self.maxDist = np.abs(self.data.get_geom_xpos('handle')[1] - self._target_pos[1]) # TODO: might need a change
         self.target_reward = 1000*self.maxDist + 1000*2
 
         return self._get_obs()
