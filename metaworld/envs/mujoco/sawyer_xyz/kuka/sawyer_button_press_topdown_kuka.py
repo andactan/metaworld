@@ -8,11 +8,11 @@ from metaworld.envs.mujoco.sawyer_xyz.sawyer_xyz_env import SawyerXYZEnv, _asser
 class SawyerButtonPressTopdownKukaEnv(SawyerXYZEnv):
 
     def __init__(self):
-        # todo: modify configurations
-        hand_low = (-0.5, 0.40, 0.05)
-        hand_high = (0.5, 1, 0.5)
-        obj_low = (-0.1, 0.8, 0.05)
-        obj_high = (0.1, 0.9, 0.05)
+        # modify configurations
+        hand_low = (0.45, -0.45, 0.2) # todo: might need calibration
+        hand_high = (0.85, 0.45, 0.3) # todo: might need calibration
+        obj_low = (0.45, -0.1, 0.05) # todo: might need calibration
+        obj_high = (0.55, 0.1, 0.05) # todo: might need calibration
 
         super().__init__(
             self.model_name,
@@ -20,14 +20,14 @@ class SawyerButtonPressTopdownKukaEnv(SawyerXYZEnv):
             hand_high=hand_high,
         )
 
-        # todo: modify initial configs
+        # modify initial configs
         self.init_config = {
-            'obj_init_pos': np.array([0, 0.8, 0.05], dtype=np.float32),
-            'hand_init_pos': np.array([0, 0.6, 0.2], dtype=np.float32),
+            'obj_init_pos': np.array([0.45, 0, 0.05], dtype=np.float32), # todo: might need calibration
+            'hand_init_pos': np.array([0.6, 0, 0.2], dtype=np.float32), # todo: might need calibration
         }
 
-        # todo: modify goal position
-        self.goal = np.array([0, 0.88, 0.1])
+        # modify goal position
+        self.goal = np.array([0.53, 0, 0.1]) # todo: might need calibration
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.hand_init_pos = self.init_config['hand_init_pos']
 
@@ -43,7 +43,7 @@ class SawyerButtonPressTopdownKukaEnv(SawyerXYZEnv):
     @property
     def model_name(self):
         # todo: modify XML path
-        return full_v1_path_for('sawyer_xyz/sawyer_button_press_topdown.xml')
+        return full_v1_path_for('sawyer_xyz/sawyer_button_press_topdown_kuka.xml')
 
     @_assert_task_is_set
     def step(self, action):
@@ -82,7 +82,7 @@ class SawyerButtonPressTopdownKukaEnv(SawyerXYZEnv):
             goal_pos = self._get_state_rand_vec()
             self.obj_init_pos = goal_pos
             button_pos = goal_pos.copy()
-            button_pos[1] += 0.08
+            button_pos[0] += 0.08
             button_pos[2] += 0.07
             self._target_pos = button_pos
             self._target_pos[2] -= 0.02
@@ -91,6 +91,7 @@ class SawyerButtonPressTopdownKukaEnv(SawyerXYZEnv):
         self.sim.model.body_pos[self.model.body_name2id('button')] = self._target_pos
         self._set_obj_xyz(0)
         self._target_pos = self._get_site_pos('hole')
+
         self.maxDist = np.abs(self.data.site_xpos[self.model.site_name2id('buttonStart')][2] - self._target_pos[2])
         self.target_reward = 1000*self.maxDist + 1000*2
 
