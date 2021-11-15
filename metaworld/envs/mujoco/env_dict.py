@@ -265,7 +265,7 @@ MEDIUM_MODE_CLS_DICT = OrderedDict((
             ('drawer-close-v1', SawyerDrawerCloseKukaEnv), # !completed
             ('button-press-topdown-v1', SawyerButtonPressTopdownKukaEnv), # completed,
             ('peg-insert-side-v1', SawyerPegInsertionSideKukaEnv),
-            ('window-open-v1', SawyerWindowOpenKukaEnv),
+            ('window-open-v1', SawyerWindowOpenKukaEnv), # !completed
             ('sweep-v1', SawyerSweepKukaEnv),
             ('basketball-v1', SawyerBasketballKukaEnv))) # !completed
     ),
