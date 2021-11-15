@@ -8,13 +8,13 @@ from metaworld.envs.mujoco.sawyer_xyz.sawyer_xyz_env import SawyerXYZEnv, _asser
 class SawyerDrawerOpenKukaEnv(SawyerXYZEnv):
     def __init__(self):
 
-        # todo: modify limit configs
-        hand_low = (-0.5, 0.40, 0.05)
-        hand_high = (0.5, 1, 0.5)
-        obj_low = (-0.1, 0.9, 0.04)
-        obj_high = (0.1, 0.9, 0.04)
-        goal_low = (-0.1, 0.5499, 0.04)
-        goal_high = (0.1, 0.5501, 0.04)
+        # modify limit configs
+        hand_low = (0.45, -0.5, 0.05) # modified
+        hand_high = (0.85, 0.5, 0.3) # modified
+        obj_low = (0.85, -0.1, 0.04) # modified
+        obj_high = (0.85, 0.1, 0.04) # modified
+        goal_low = (0.5499, -0.1, 0.04) # modified
+        goal_high = (0.5501, 0.1, 0.04) # modified
 
         super().__init__(
             self.model_name,
@@ -22,11 +22,11 @@ class SawyerDrawerOpenKukaEnv(SawyerXYZEnv):
             hand_high=hand_high,
         )
 
-        # todo: modify init config
+        # modify init config
         self.init_config = {
-            'obj_init_angle': np.array([0.3, ], dtype=np.float32),
-            'obj_init_pos': np.array([0., 0.9, 0.04], dtype=np.float32),
-            'hand_init_pos': np.array([0, 0.6, 0.2], dtype=np.float32),
+            'obj_init_angle': np.array([0.3, ], dtype=np.float32), # modified
+            'obj_init_pos': np.array([0.85, 0., 0.04], dtype=np.float32), # modified
+            'hand_init_pos': np.array([0.55, 0, 0.2], dtype=np.float32), # modified
         }
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.obj_init_angle = self.init_config['obj_init_angle']
@@ -40,8 +40,8 @@ class SawyerDrawerOpenKukaEnv(SawyerXYZEnv):
 
     @property
     def model_name(self):
-        # todo: modify XML path
-        return full_v1_path_for('sawyer_xyz/sawyer_drawer.xml')
+        # modify XML path
+        return full_v1_path_for('sawyer_xyz/sawyer_drawer_kuka.xml')
 
     @_assert_task_is_set
     def step(self, action):
@@ -68,14 +68,14 @@ class SawyerDrawerOpenKukaEnv(SawyerXYZEnv):
 
     def reset_model(self):
         self._reset_hand()
-        self._target_pos = self.obj_init_pos - np.array([.0, .35, .0])
+        self._target_pos = self.obj_init_pos - np.array([.35, .0, .0]) # swapped first and second index
         self.objHeight = self.data.get_geom_xpos('handle')[2]
 
         if self.random_init:
             obj_pos = self._get_state_rand_vec()
             self.obj_init_pos = obj_pos
             goal_pos = obj_pos.copy()
-            goal_pos[1] -= 0.35
+            goal_pos[0] -= 0.35 # changed index
             self._target_pos = goal_pos
 
         drawer_cover_pos = self.obj_init_pos.copy()
