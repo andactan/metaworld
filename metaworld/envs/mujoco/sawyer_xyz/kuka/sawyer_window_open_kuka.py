@@ -9,12 +9,12 @@ class SawyerWindowOpenKukaEnv(SawyerXYZEnv):
 
     def __init__(self):
 
-        # todo: modify range configs
+        # modify range configs
         liftThresh = 0.02
-        hand_low = (-0.5, 0.40, 0.05)
-        hand_high = (0.5, 1, 0.5)
-        obj_low = (-0.1, 0.7, 0.16)
-        obj_high = (0.1, 0.9, 0.16)
+        hand_low = (0.1, -0.45, 0.05) # calibrated
+        hand_high = (0.6, 0.45, 0.3) # calibrated
+        obj_low = (0.65, -0.1, 0.16) # calibrated
+        obj_high = (0.75, 0.1, 0.16) # calibrated
 
         super().__init__(
             self.model_name,
@@ -22,15 +22,15 @@ class SawyerWindowOpenKukaEnv(SawyerXYZEnv):
             hand_high=hand_high,
         )
 
-        # todo: modify init config
+        # modify init config
         self.init_config = {
-            'obj_init_angle': np.array([0.3, ], dtype=np.float32),
-            'obj_init_pos': np.array([-0.1, 0.785, 0.15], dtype=np.float32),
-            'hand_init_pos': np.array([0, 0.6, 0.2], dtype=np.float32),
+            'obj_init_angle': np.array([0.3, ], dtype=np.float32), # calibrated
+            'obj_init_pos': np.array([0.7, -0.1, 0.15], dtype=np.float32), # calibrated
+            'hand_init_pos': np.array([0.45, 0, 0.2], dtype=np.float32), # calibrated
         }
 
-        # todo: modify goal position
-        self.goal = np.array([0.08, 0.785, 0.15])
+        # modify goal position
+        self.goal = np.array([0.7, 0.08, 0.15]) # calibrated
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.obj_init_angle = self.init_config['obj_init_angle']
         self.hand_init_pos = self.init_config['hand_init_pos']
@@ -48,8 +48,8 @@ class SawyerWindowOpenKukaEnv(SawyerXYZEnv):
 
     @property
     def model_name(self):
-        # todo: modify XML path
-        return full_v1_path_for('sawyer_xyz/sawyer_window_horizontal.xml')
+        # modify XML path
+        return full_v1_path_for('sawyer_xyz/sawyer_window_horizontal_kuka.xml')
 
     @_assert_task_is_set
     def step(self, action):
@@ -80,11 +80,11 @@ class SawyerWindowOpenKukaEnv(SawyerXYZEnv):
             obj_pos = self._get_state_rand_vec()
             self.obj_init_pos = obj_pos
             goal_pos = obj_pos.copy()
-            goal_pos[0] += 0.18
+            goal_pos[1] += 0.18 # changed index
             self._target_pos = goal_pos
 
-        wall_pos = self.obj_init_pos.copy() - np.array([-0.1, 0, 0.12])
-        window_another_pos = self.obj_init_pos.copy() + np.array([0.2, 0.03, 0])
+        wall_pos = self.obj_init_pos.copy() - np.array([0, -0.1, 0.12])
+        window_another_pos = self.obj_init_pos.copy() + np.array([0.03, 0.2, 0])
         self.sim.model.body_pos[self.model.body_name2id('window')] = self.obj_init_pos
         self.sim.model.body_pos[self.model.body_name2id('window_another')] = window_another_pos
         self.sim.model.body_pos[self.model.body_name2id('wall')] = wall_pos

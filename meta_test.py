@@ -3,7 +3,7 @@ import time
 import random
 
 ml10 = metaworld.ML10() # Construct the benchmark, sampling tasks
-TRAIN_CLASS = 'button-press-topdown-v1'
+TRAIN_CLASS = 'window-open-v1'
 env = ml10.train_classes[TRAIN_CLASS]()
 task = [task for task in ml10.train_tasks
                         if task.env_name == TRAIN_CLASS]
