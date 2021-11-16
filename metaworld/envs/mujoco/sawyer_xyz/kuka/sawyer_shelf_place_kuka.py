@@ -9,14 +9,14 @@ class SawyerShelfPlaceKukaEnv(SawyerXYZEnv):
 
     def __init__(self):
 
-        # todo: modify range configs
+        # modify range configs
         liftThresh = 0.04
-        hand_low = (-0.5, 0.40, 0.05)
-        hand_high = (0.5, 1, 0.5)
-        obj_low = (-0.1, 0.5, 0.02)
-        obj_high = (0.1, 0.6, 0.02)
-        goal_low = (-0.1, 0.75, 0.001)
-        goal_high = (0.1, 0.85, 0.001)
+        hand_low = (0.45, -0.5, 0.05)
+        hand_high = (0.85, 0.5, 0.5)
+        obj_low = (0.45, -0.1, 0.02)
+        obj_high = (0.55, 0.1, 0.02)
+        goal_low = (0.65, -0.1, 0.001)
+        goal_high = (0.75, 0.1, 0.001)
 
         super().__init__(
             self.model_name,
@@ -24,15 +24,15 @@ class SawyerShelfPlaceKukaEnv(SawyerXYZEnv):
             hand_high=hand_high,
         )
 
-        # todo: modify initi config
+        # modify init config
         self.init_config = {
-            'obj_init_pos':np.array([0, 0.6, 0.02]),
+            'obj_init_pos': np.array([0.45, 0, 0.02]),
             'obj_init_angle': 0.3,
-            'hand_init_pos': np.array([0, 0.6, 0.2], dtype=np.float32),
+            'hand_init_pos': np.array([0.45, 0, 0.2], dtype=np.float32),
         }
 
-        # todo: modify goal position
-        self.goal = np.array([0., 0.85, 0.001], dtype=np.float32)
+        # modify goal position
+        self.goal = np.array([0.7, 0., 0.001], dtype=np.float32)
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.obj_init_angle = self.init_config['obj_init_angle']
         self.hand_init_pos = self.init_config['hand_init_pos']
@@ -53,7 +53,7 @@ class SawyerShelfPlaceKukaEnv(SawyerXYZEnv):
     @property
     def model_name(self):
         # todo: modify XML path
-        return full_v1_path_for('sawyer_xyz/sawyer_shelf_placing.xml')
+        return full_v1_path_for('sawyer_xyz/sawyer_shelf_placing_kuka.xml')
 
     @_assert_task_is_set
     def step(self, action):
