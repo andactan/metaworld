@@ -7,15 +7,15 @@ class SawyerDoorCloseKukaEnv(SawyerDoorKukaEnv):
     def __init__(self):
         super().__init__()
 
-        # todo: modify init configs
+        # modify init configs
         self.init_config = {
             'obj_init_angle': 0.3,
-            'obj_init_pos': np.array([0.1, 0.95, 0.1], dtype=np.float32),
-            'hand_init_pos': np.array([0, 0.6, 0.2], dtype=np.float32),
+            'obj_init_pos': np.array([0.95, 0.1, 0.1], dtype=np.float32),
+            'hand_init_pos': np.array([0.6, 0, 0.2], dtype=np.float32),
         }
 
-        # todo: modify goal position
-        self.goal = np.array([0.2, 0.8, 0.15])
+        # modify goal position
+        self.goal = np.array([0.8, 0.2, 0.15])
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.obj_init_angle = self.init_config['obj_init_angle']
         self.hand_init_pos = self.init_config['hand_init_pos']
@@ -28,7 +28,7 @@ class SawyerDoorCloseKukaEnv(SawyerDoorKukaEnv):
         if self.random_init:
             obj_pos = self._get_state_rand_vec()
             self.obj_init_pos = obj_pos
-            goal_pos = obj_pos.copy() + np.array([0.1, -0.15, 0.05])
+            goal_pos = obj_pos.copy() + np.array([-0.15, 0.1, 0.05])
             self._target_pos = goal_pos
 
         self.sim.model.body_pos[self.model.body_name2id('door')] = self.obj_init_pos
