@@ -272,7 +272,7 @@ MEDIUM_MODE_CLS_DICT = OrderedDict((
     ('test',
         OrderedDict((
             ('drawer-open-v1', SawyerDrawerOpenKukaEnv), # !completed
-            ('door-close-v1', SawyerDoorCloseKukaEnv),
+            ('door-close-v1', SawyerDoorCloseKukaEnv), # !completed
             ('shelf-place-v1', SawyerShelfPlaceKukaEnv),
             ('sweep-into-v1', SawyerSweepIntoGoalEnv),
             ('lever-pull-v1', SawyerLeverPullEnv,))) # completed
