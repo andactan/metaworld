@@ -9,14 +9,14 @@ class SawyerSweepKukaEnv(SawyerXYZEnv):
 
     def __init__(self):
 
-        # todo: modify range configs
+        # modify range configs
         init_puck_z = 0.1
-        hand_low = (-0.5, 0.40, 0.05)
-        hand_high = (0.5, 1.0, 0.5)
-        obj_low = (-0.1, 0.6, 0.02)
-        obj_high = (0.1, 0.7, 0.02)
-        goal_low = (.99, .6, -0.301)
-        goal_high = (1.01, .7, -0.299)
+        hand_low = (0.45, -0.45, 0.05)
+        hand_high = (0.85, 0.45, 0.3)
+        obj_low = (0.45, -0.1, 0.02)
+        obj_high = (0.55, 0.1, 0.02)
+        goal_low = (.65, -.44, -0.301) # ask this (z-value)
+        goal_high = (.75, -.45, -0.299) # ask this (z-value)
 
         super().__init__(
             self.model_name,
@@ -24,15 +24,15 @@ class SawyerSweepKukaEnv(SawyerXYZEnv):
             hand_high=hand_high,
         )
 
-        # todo: modify init config
+        # modify init config
         self.init_config = {
-            'obj_init_pos':np.array([0., 0.6, 0.02]),
+            'obj_init_pos':np.array([0.5, 0., 0.02]),
             'obj_init_angle': 0.3,
-            'hand_init_pos': np.array([0., .6, .2]),
+            'hand_init_pos': np.array([.6, 0., .2]),
         }
 
-        # todo: modify goal position
-        self.goal = np.array([0., 0.95, -0.3])
+        # modify goal position
+        self.goal = np.array([0.75, 0., -0.3])
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.obj_init_angle = self.init_config['obj_init_angle']
         self.hand_init_pos = self.init_config['hand_init_pos']
@@ -47,8 +47,8 @@ class SawyerSweepKukaEnv(SawyerXYZEnv):
 
     @property
     def model_name(self):
-        # todo: modify XML path
-        return full_v1_path_for('sawyer_xyz/sawyer_sweep.xml')
+        # modify XML path
+        return full_v1_path_for('sawyer_xyz/sawyer_sweep_kuka.xml')
 
     @_assert_task_is_set
     def step(self, action):
@@ -79,7 +79,7 @@ class SawyerSweepKukaEnv(SawyerXYZEnv):
             obj_pos = self._get_state_rand_vec()
             self.obj_init_pos = np.concatenate((obj_pos[:2], [self.obj_init_pos[-1]]))
             goal_pos = obj_pos.copy()
-            goal_pos[0] = 1.0
+            goal_pos[1] = -0.45 # east of the effector is -y (also modified)
             goal_pos[2] = -0.3
             self._target_pos = goal_pos
 

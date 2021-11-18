@@ -43,8 +43,8 @@ class SawyerSweepIntoGoalKukaEnv(SawyerXYZEnv):
 
     @property
     def model_name(self):
-        # todo: modify XML path
-        return full_v1_path_for('sawyer_xyz/sawyer_table_with_hole.xml')
+        # modify XML path
+        return full_v1_path_for('sawyer_xyz/sawyer_table_with_hole_kuka.xml')
 
     @_assert_task_is_set
     def step(self, action):
