@@ -263,8 +263,8 @@ MEDIUM_MODE_CLS_DICT = OrderedDict((
             ('pick-place-v1', SawyerReachPushPickPlaceKukaEnv), # !completed
             ('door-open-v1', SawyerDoorKukaEnv), # !completed
             ('drawer-close-v1', SawyerDrawerCloseKukaEnv), # !completed
-            ('button-press-topdown-v1', SawyerButtonPressTopdownKukaEnv), # completed,
-            ('peg-insert-side-v1', SawyerPegInsertionSideKukaEnv),
+            ('button-press-topdown-v1', SawyerButtonPressTopdownKukaEnv), # completed todo: calibration
+            ('peg-insert-side-v1', SawyerPegInsertionSideKukaEnv), # !completed
             ('window-open-v1', SawyerWindowOpenKukaEnv), # !completed
             ('sweep-v1', SawyerSweepKukaEnv), # completed todo: calibration
             ('basketball-v1', SawyerBasketballKukaEnv))) # !completed

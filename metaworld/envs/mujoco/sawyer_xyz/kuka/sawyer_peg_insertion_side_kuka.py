@@ -9,15 +9,15 @@ class SawyerPegInsertionSideKukaEnv(SawyerXYZEnv):
 
     def __init__(self):
 
-        # todo: modify range configs
+        # modify range configs
         liftThresh = 0.11
-        hand_init_pos = (0, 0.6, 0.2)
-        hand_low = (-0.5, 0.40, 0.05)
-        hand_high = (0.5, 1, 0.5)
-        obj_low = (-0.1, 0.5, 0.02)
-        obj_high = (0.1, 0.7, 0.02)
-        goal_low = (-0.35, 0.5, 0.05)
-        goal_high = (-0.25, 0.8, 0.05)
+        hand_init_pos = (0.6, 0, 0.2)
+        hand_low = (0.45, -0.45, 0.05)
+        hand_high = (0.85, 0.45, 0.3)
+        obj_low = (0.5, -0.1, 0.02)
+        obj_high = (0.55, 0.1, 0.02)
+        goal_low = (0.65, -0.35, 0.1)
+        goal_high = (0.75, -0.25, 0.1)
 
         super().__init__(
             self.model_name,
@@ -25,14 +25,14 @@ class SawyerPegInsertionSideKukaEnv(SawyerXYZEnv):
             hand_high=hand_high,
         )
 
-        # todo: modify init config
+        # modify init config
         self.init_config = {
-            'obj_init_pos': np.array([0, 0.6, 0.02]),
-            'hand_init_pos': np.array([0, .6, .2]),
+            'obj_init_pos': np.array([0.65, 0, 0.02]),
+            'hand_init_pos': np.array([.6, 0, .2]),
         }
 
-        # todo: modify goal position
-        self.goal = np.array([-0.3, 0.6, 0.05])
+        # modify goal position
+        self.goal = np.array([0.65, -0.3, 0.1])
 
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.hand_init_pos = self.init_config['hand_init_pos']
@@ -52,8 +52,8 @@ class SawyerPegInsertionSideKukaEnv(SawyerXYZEnv):
 
     @property
     def model_name(self):
-        # todo: modify XML path
-        return full_v1_path_for('sawyer_xyz/sawyer_peg_insertion_side.xml')
+        # modify XML path
+        return full_v1_path_for('sawyer_xyz/sawyer_peg_insertion_side_kuka.xml')
 
     @_assert_task_is_set
     def step(self, action):
@@ -79,7 +79,7 @@ class SawyerPegInsertionSideKukaEnv(SawyerXYZEnv):
     def reset_model(self):
         self._reset_hand()
 
-        self.sim.model.body_pos[self.model.body_name2id('box')] = np.array([-0.3, 0.6, 0.05])
+        self.sim.model.body_pos[self.model.body_name2id('box')] = np.array([0.65, -0.3, 0.1])
         self._target_pos = self.sim.model.site_pos[self.model.site_name2id('hole')] + self.sim.model.body_pos[self.model.body_name2id('box')]
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.objHeight = self.get_body_com('peg').copy()[2]

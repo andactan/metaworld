@@ -6,27 +6,27 @@
     <!-- update base -->
     <include file="sawyer_xyz_base_kuka.xml"></include>
 
-    <!-- todo update position -->
-    <body name="peg" pos="0 0.6 0.02">
+    <!-- update position -->
+    <body name="peg" pos="0.6 0 0.02">
       <inertial pos="0 0 0" mass="0.1" diaginertia="100000 100000 100000"/>
       <!-- <geom name="peg" fromto="-0.04 0 0 0.04 0 0" rgba="0.3 1 0.3 1" size="0.02 0.08" type="cylinder" solref="0.02 1" conaffinity="1" contype="1" group="1"/> -->
-      <geom name="peg" fromto="-0.04 0 0 0.04 0 0" rgba="0.3 1 0.3 1" size="0.02 0.08" type="cylinder" conaffinity="1" contype="1" group="1"/>
+      <geom name="peg" fromto="0 -0.04 0 0 0.04 0" rgba="0.3 1 0.3 1" size="0.02 0.08" type="cylinder" conaffinity="1" contype="1" group="1"/>
       <joint type="free" limited="false" damping="0.005"/>
-      <site name="pegHead" pos="-0.04 0 0" size="0.005" rgba="0.8 0 0 1"/>
-      <site name="pegEnd" pos="0.04 0 0" size="0.005" rgba="0.8 0 0 1"/>
+      <site name="pegHead" pos="0 -0.04 0" size="0.005" rgba="0.8 0 0 1"/>
+      <site name="pegEnd" pos="0 0.04 0" size="0.005" rgba="0.8 0 0 1"/>
     </body>
 
-    <!-- todo update position -->
-    <body name="box" pos="-0.3 0.6 0.05">
+    <!-- update position -->
+    <body name="box" pos="0.6 -0.3 0.05">
       <!-- <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.1 0.05" name="box_bottom" conaffinity="1" pos="0 0 0" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
           <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.1 0.05" name="box_top" conaffinity="1" pos="0 0 0.16" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
           <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.035 0.03" name="box_left" conaffinity="1" pos="0 0.065 0.08" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/>
           <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.035 0.03" name="box_right" conaffinity="1" pos="0 -0.065 0.08" mass="1000" solimp="0.99 0.99 0.01" solref="0.01 1"/> -->
       <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.1 0.05" name="box_bottom" conaffinity="1" pos="0 0 0" mass="1000"/>
       <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.1 0.05" name="box_top" conaffinity="1" pos="0 0 0.16" mass="1000"/>
-      <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.035 0.03" name="box_left" conaffinity="1" pos="0 0.065 0.08" mass="1000"/>
-      <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.035 0.03" name="box_right" conaffinity="1" pos="0 -0.065 0.08" mass="1000"/>
-      <site name="hole" pos="0.1 0 0.08" size="0.005" rgba="0 0.8 0 1"/>
+      <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.035 0.1 0.03" name="box_left" conaffinity="1" pos="0.065 0 0.08" mass="1000"/>
+      <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.035 0.1 0.03" name="box_right" conaffinity="1" pos="-0.065 0 0.08" mass="1000"/>
+      <site name="hole" pos="0 0.1 0.08" size="0.005" rgba="0 0.8 0 1"/>
       <!-- <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.1 0.05" name="box_bottom" conaffinity="1" pos="0 0 0" mass="1000" solimp="0.9 0.9 0.01" solref="0.05 1"/>
           <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.1 0.05" name="box_top" conaffinity="1" pos="0 0 0.16" mass="1000" solimp="0.9 0.9 0.01" solref="0.05 1"/>
           <geom rgba="0.3 0.3 1 1" type="box" contype="1" size="0.1 0.035 0.03" name="box_left" conaffinity="1" pos="0 0.065 0.08" mass="1000" solimp="0.9 0.9 0.01" solref="0.05 1"/>
@@ -35,8 +35,8 @@
       <!-- <joint type="slide" range="-0.2 0." axis="0 1 0" name="goal_slidey" pos="0 0 0" damping="1.0"/> -->
     </body>
 
-    <!-- todo update position -->
-    <site name="goal" pos="0 0.6 0.05" size="0.01" rgba="0.8 0 0 1"/>
+    <!-- update position -->
+    <site name="goal" pos="0.6 0 0.05" size="0.01" rgba="0.8 0 0 1"/>
   </worldbody>
 
   <actuator>

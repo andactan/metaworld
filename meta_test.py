@@ -3,9 +3,9 @@ import time
 import random
 
 ml10 = metaworld.ML10() # Construct the benchmark, sampling tasks
-TRAIN_CLASS = 'sweep-into-v1'
-env = ml10.test_classes[TRAIN_CLASS]()
-task = [task for task in ml10.test_tasks
+TRAIN_CLASS = 'peg-insert-side-v1'
+env = ml10.train_classes[TRAIN_CLASS]()
+task = [task for task in ml10.train_tasks
                         if task.env_name == TRAIN_CLASS]
 env.set_task(task[0])
 print(env)
