@@ -266,7 +266,7 @@ MEDIUM_MODE_CLS_DICT = OrderedDict((
             ('button-press-topdown-v1', SawyerButtonPressTopdownKukaEnv), # completed,
             ('peg-insert-side-v1', SawyerPegInsertionSideKukaEnv),
             ('window-open-v1', SawyerWindowOpenKukaEnv), # !completed
-            ('sweep-v1', SawyerSweepKukaEnv),
+            ('sweep-v1', SawyerSweepKukaEnv), # completed todo: calibration
             ('basketball-v1', SawyerBasketballKukaEnv))) # !completed
     ),
     ('test',
@@ -274,8 +274,8 @@ MEDIUM_MODE_CLS_DICT = OrderedDict((
             ('drawer-open-v1', SawyerDrawerOpenKukaEnv), # !completed
             ('door-close-v1', SawyerDoorCloseKukaEnv), # !completed
             ('shelf-place-v1', SawyerShelfPlaceKukaEnv), # !completed
-            ('sweep-into-v1', SawyerSweepIntoGoalEnv),
-            ('lever-pull-v1', SawyerLeverPullEnv,))) # completed
+            ('sweep-into-v1', SawyerSweepIntoGoalKukaEnv), # !completed
+            ('lever-pull-v1', SawyerLeverPullKukaEnv,))) # completed
     )
 ))
 medium_mode_train_args_kwargs = {

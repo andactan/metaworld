@@ -8,13 +8,13 @@ from metaworld.envs.mujoco.sawyer_xyz.sawyer_xyz_env import SawyerXYZEnv, _asser
 class SawyerSweepIntoGoalKukaEnv(SawyerXYZEnv):
 
     def __init__(self):
-        # todo: modify range configs
-        hand_low = (-0.5, 0.40, 0.05)
-        hand_high = (0.5, 1, 0.5)
-        obj_low = (-0.1, 0.6, 0.02)
-        obj_high = (0.1, 0.7, 0.02)
-        goal_low = (-.001, 0.8399, 0.0199)
-        goal_high = (+.001, 0.8401, 0.0201)
+        # modify range configs
+        hand_low = (0.44, -0.5, 0.05)
+        hand_high = (0.85, 0.5, 0.3)
+        obj_low = (0.45, -0.1, 0.02) # calibrated
+        obj_high = (0.55, 0.1, 0.02) # calibrated
+        goal_low = (0.7399, -.001, 0.0199) # calibrated
+        goal_high = (0.7401, +.001, 0.0201) # calibrated
 
         super().__init__(
             self.model_name,
@@ -22,15 +22,15 @@ class SawyerSweepIntoGoalKukaEnv(SawyerXYZEnv):
             hand_high=hand_high,
         )
 
-        # todo: modify init config
+        # modify init config
         self.init_config = {
-            'obj_init_pos':np.array([0., 0.6, 0.02]),
+            'obj_init_pos':np.array([0.45, 0., 0.02]),
             'obj_init_angle': 0.3,
-            'hand_init_pos': np.array([0., .6, .2]),
+            'hand_init_pos': np.array([.6, 0., .2]),
         }
 
-        # todo: modify goal position
-        self.goal = np.array([0., 0.84, 0.02])
+        # modify goal position
+        self.goal = np.array([0.74, 0., 0.02])
         self.obj_init_pos = self.init_config['obj_init_pos']
         self.obj_init_angle = self.init_config['obj_init_angle']
         self.hand_init_pos = self.init_config['hand_init_pos']
